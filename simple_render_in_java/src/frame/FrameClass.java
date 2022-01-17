@@ -25,9 +25,12 @@ public class FrameClass {
 
 		public void paintComponent(Graphics graphics){
               Graphics2D g2d = (Graphics2D) graphics;
+              g2d.fillRect(0, 0, getWidth(), getHeight());
               g2d.translate(getWidth() / 2, getHeight() / 2);
+
               Triangle tri = new Triangle();
-              tri.triangleForm(g2d,horizontalSlider);
+              tri.triangleForm(g2d,horizontalSlider,verticalSlider, this);
+              
           }
         };
         verticalSlider.addChangeListener(e -> renderPanel.repaint());

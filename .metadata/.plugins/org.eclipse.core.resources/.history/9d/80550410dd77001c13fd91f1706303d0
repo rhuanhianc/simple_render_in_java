@@ -1,0 +1,30 @@
+package frame;
+import java.awt.*;
+import javax.swing.*;
+
+import forms.Triangle;
+
+import java.awt.geom.Path2D;
+
+public class FrameClass {
+    
+    public Container conteiner(Container contentPane){
+        contentPane.setLayout(new BorderLayout());
+  
+        JSlider horizontalSlider = new JSlider(JSlider.HORIZONTAL, 0, 360, 100);
+        contentPane.add(horizontalSlider, BorderLayout.SOUTH);
+      
+        JSlider verticalSlider = new JSlider(JSlider.VERTICAL, -90, 90, 0);
+        contentPane.add(verticalSlider, BorderLayout.EAST);
+      
+        JPanel renderPanel = new JPanel(){
+          public void showRender(Graphics graphics){
+              Graphics2D g2d = (Graphics2D) graphics;
+              g2d.translate(getWidth() / 2, getHeight() / 2);
+          }
+        };
+        contentPane.add(renderPanel, BorderLayout.CENTER);
+        return contentPane;
+    }
+
+}

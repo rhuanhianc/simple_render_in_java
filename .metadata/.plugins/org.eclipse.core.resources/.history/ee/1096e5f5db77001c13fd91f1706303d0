@@ -1,0 +1,65 @@
+package frame;
+
+import javax.swing.*;
+
+import forms.Triangle;
+import vertex.Vertex;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Path2D;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FrameClass {
+    
+    public Container conteiner(Container contentPane){
+        contentPane.setLayout(new BorderLayout());
+  
+        JSlider horizontalSlider = new JSlider(JSlider.HORIZONTAL, 0, 360, 100);
+        contentPane.add(horizontalSlider, BorderLayout.SOUTH);
+      
+        JSlider verticalSlider = new JSlider(JSlider.VERTICAL, -90, 90, 0);
+        contentPane.add(verticalSlider, BorderLayout.EAST);
+      
+        JPanel renderPanel = new JPanel(){
+          public void showRender(Graphics graphics){
+              Graphics2D g2d = (Graphics2D) graphics;
+              g2d.translate(getWidth() / 2, getHeight() / 2);
+              ArrayList<Triangle> triangle = new ArrayList<>();
+              triangle.add(new Triangle(new Vertex(100, 100, 100),
+                            new Vertex(-100, -100, 100),
+                            new Vertex(-100, 100, -100),
+                            Color.WHITE));
+              triangle.add(new Triangle(new Vertex(100, 100, 100),
+                            new Vertex(-100, -100, 100),
+                            new Vertex(100, -100, -100),
+                            Color.RED));
+             triangle.add(new Triangle(new Vertex(-100, 100, -100),
+                            new Vertex(100, -100, -100),
+                            new Vertex(100, 100, 100),
+                            Color.GREEN));
+             triangle.add(new Triangle(new Vertex(-100, 100, -100),
+                            new Vertex(100, -100, -100),
+                            new Vertex(-100, -100, 100),
+                            Color.BLUE));
+             g2d.setColor(Color.WHITE);
+                for (Triangle t : triangle) {
+                Path2D path = new Path2D.Double();
+                path.moveTo(t.v1.x, t.v1.y);
+                path.lineTo(t.v2.x, t.v2.y);
+                path.lineTo(t.v3.x, t.v3.y);
+                path.closePath();
+                g2d.draw(path);}
+          }
+        };
+        contentPane.add(renderPanel, BorderLayout.CENTER);
+        return contentPane;
+    }
+       public void triangleForm(){
+        
+    }
+}
